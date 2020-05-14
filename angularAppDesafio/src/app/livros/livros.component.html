@@ -1,0 +1,30 @@
+<div class="row mt-3">
+    <h3>Livros Cadastrados</h3>
+<table class="table table-borderless">
+    <thead class="thead-light">
+        <th>Título</th>
+        <th>Editora</th>
+        <th>Edição</th>
+        <th>Ano</th>
+        <th>Autor(es)</th>
+        <th>Assunto(s)</th>
+        <th><a class="btn btn-sm btn-success text-white" routerLink="/livro"><i class="fa fa-plus"></i> Novo Livro</a></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listaLivros;let i=index;">
+            <td>{{item.titulo}}</td>
+            <td>{{item.editora}}</td>
+            <td>{{item.edicao}}</td>
+            <td>{{item.anoPublicacao}}</td>
+            <td><span *ngIf="item.livroAutores.length>1"
+                   class="badge badge-warning text-white mr-1">{{item.livroAutores.length-1}}</span>{{item.livroAutores[0].autor.nome}}</td>
+            <td><span *ngIf="item.livroAssuntos.length>1"
+                   class="badge badge-warning text-white mr-1">{{item.livroAssuntos.length-1}}</span>{{item.livroAssuntos[0].assunto.descricao}}</td>            
+            <td>
+                <a class="btn btn-sm btn-info text-white" (click)="editarLivro(item.codl)"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger text-white ml-1" (click)="deletarLivro(item.codl)"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

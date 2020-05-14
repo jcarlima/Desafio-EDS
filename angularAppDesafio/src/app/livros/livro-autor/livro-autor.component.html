@@ -1,0 +1,13 @@
+<form autocomplete="off" [formGroup]="formulario">
+<div class="form-group">
+    <label>Autores</label>
+    <select name="codAu"  formControlName="codAu" class="form-control" (change)="atualizaDescricao($event.target)" 
+    [class.is-invalid]="formulario.value.codAu == 0 && !evalido">
+      <option value="0">-Selecione autor-</option>
+      <option *ngFor="let item of autores" value="{{item.codAu}}">{{item.nome}}</option>
+    </select>    
+  </div>
+  <div class="form-group">
+    <a type="button" class="btn btn-sm btn-info text-white" [mat-dialog-close]><i class="fa fa-close"></i> Sair</a>
+  </div>
+</form>

@@ -1,0 +1,41 @@
+
+<form autocomplete="off" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div class="row mt-5">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Assunto do Livro</label>
+                <input id="descricao" maxlength=20 formControlName="descricao" class="form-control" [ngClass]="aplicarCssErro('descricao')">
+                <div class="invalid-feedback">
+                    Campo Obrigatório e deve conter mais de 2 letras.
+                  </div>
+            </div>            
+            <div class="form-group">
+                <button type="submit" 
+                        [ngClass]="!modoEditar ? 'btn btn-dark' : 'btn btn-info'" >
+                    <i [ngClass]="!modoEditar ? 'fa fa-database' : 'fa fa-edit'" ></i>{{!modoEditar ? ' Cadastrar' : ' Editar'}}</button>
+                <a *ngIf="modoEditar" class="ml-1 btn btn-info text-white ml-1" (click)="cancelarEdicao()" ><i *ngIf="modoEditar" class="fa fa-ban"></i> Cancelar</a>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Tabela de Assuntos-->
+<div class="row mt-3">
+<h3>Assuntos Cadastrados</h3>
+<table class="table table-borderless">
+    <thead class="thead-light">
+        <th>codigo</th>
+        <th>assunto</th>
+        <th>Ações</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listaAssuntos;let i=index;">
+            <td>{{item.codAs}}</td>
+            <td>{{item.descricao}}</td>
+            <td>
+                <a class="btn btn-sm btn-info text-white" (click)="editar(item)" ><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger text-white ml-1" (click)="remover(item)"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
