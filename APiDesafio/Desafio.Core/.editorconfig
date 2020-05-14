@@ -1,0 +1,19 @@
+﻿[*.cs]
+
+# CA1051: Não declarar campos de instância visíveis
+dotnet_diagnostic.CA1051.severity = none
+
+# CA1707: Identificadores não devem conter sublinhados
+dotnet_diagnostic.CA1707.severity = none
+
+# CA2007: Considere chamar ConfigureAwait na tarefa esperada
+dotnet_diagnostic.CA2007.severity = none
+
+# CA1063: Implementar IDisposable corretamente
+dotnet_diagnostic.CA1063.severity = none
+
+# CA1720: O identificador contém o nome de tipo
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1062: Validar argumentos de métodos públicos
+dotnet_diagnostic.CA1062.severity = none
