@@ -22,7 +22,7 @@
                    class="badge badge-warning text-white mr-1">{{item.livroAssuntos.length-1}}</span>{{item.livroAssuntos[0].assunto.descricao}}</td>            
             <td>
                 <a class="btn btn-sm btn-info text-white" (click)="editarLivro(item.codl)"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-sm btn-danger text-white ml-1" (click)="deletarLivro(item.codl)"><i class="fa fa-trash"></i></a>
+                <a class="btn btn-sm btn-danger text-white ml-1" (click)="deletarLivro(item)"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
     </tbody>

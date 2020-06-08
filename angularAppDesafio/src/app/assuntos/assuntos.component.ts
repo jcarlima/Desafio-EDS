@@ -23,7 +23,10 @@ export class AssuntosComponent implements OnInit {
 
   ngOnInit(): void {
     this.atualizarLista();
+    this.resetFormulario()
+  }
 
+  resetFormulario(){
     this.formulario = this.formBuilder.group({
       codAs: [0],
       descricao: [null,[Validators.required, Validators.minLength(2)]],
@@ -43,7 +46,7 @@ export class AssuntosComponent implements OnInit {
   
   cancelarEdicao(){
     this.formulario.reset;
-    this.formulario.setValue(this.resetCampos );
+    this.resetFormulario();
     this.modoEditar = false;
     this.toastr.warning('Edição Cancelada', 'Desafio EDS.');
   }
@@ -67,8 +70,9 @@ export class AssuntosComponent implements OnInit {
   }
 
   cadastrarAssunto(){
-    this.service.cadastrarAssunto(this.formulario.value).subscribe(res => {     
-      this.formulario.setValue(this.resetCampos);
+    this.service.cadastrarAssunto(this.formulario.value).subscribe(res => { 
+      this.formulario.reset;    
+      this.resetFormulario();
       this.atualizarLista();
       this.toastr.success('Assunto Cadastrado com sucesso', 'Desafio EDS.');
     }, (error: any ) =>
@@ -79,8 +83,8 @@ export class AssuntosComponent implements OnInit {
   
   alterarAssunto(){
     this.service.editarAssunto(this.formulario.value).subscribe(res => {
-      this.formulario.reset;
-      this.formulario.setValue(this.resetCampos);
+      this.formulario.reset;    
+      this.resetFormulario();
       this.modoEditar = false;
       this.atualizarLista();
       this.toastr.success('Assunto alterado com sucesso', 'Desafio EDS.');
@@ -91,8 +95,8 @@ export class AssuntosComponent implements OnInit {
   }
 
   remover(item: Assunto){
-    this.formulario.reset;
-    this.formulario.setValue(this.resetCampos);
+    this.formulario.reset;    
+    this.resetFormulario();
     if (confirm('Deseja remover o assunto '+ item.descricao + ' ?')) {
       this.service.removerAssunto(item.codAs).subscribe(res => {
         this.atualizarLista();

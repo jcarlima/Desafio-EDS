@@ -14,7 +14,6 @@ export class AutoresComponent implements OnInit {
   formulario: FormGroup;
   listaAutores: Autor[];
   modoEditar: boolean = false;
-  resetarValor: Autor = { codAu: 0, nome: '', livroAutores: []}
 
   constructor(private service: AutorService,
               private toastr: ToastrService,
@@ -22,7 +21,10 @@ export class AutoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.atualizarLista();
+    this.resetFormulario();
+  }
 
+  resetFormulario(){
     this.formulario = this.formBuilder.group({
       codAu: [0],
       nome: [null,[ Validators.required, Validators.maxLength(40)]],
@@ -42,7 +44,7 @@ export class AutoresComponent implements OnInit {
   
   cancelarEdicao(){
     this.formulario.reset;
-    this.formulario.setValue(this.resetarValor );
+    this.resetFormulario();
     this.modoEditar = false;
   }
   
@@ -66,7 +68,8 @@ export class AutoresComponent implements OnInit {
   
   cadastrarAutor(){
     this.service.cadastrarAutor(this.formulario.value).subscribe(res => {
-      this.formulario.setValue(this.resetarValor );
+      this.formulario.reset;
+      this.resetFormulario();
       this.atualizarLista();
       this.toastr.success('Autor Cadastrado com sucesso', 'Desafio EDS.');
     }, (error: any ) =>
@@ -77,8 +80,9 @@ export class AutoresComponent implements OnInit {
 
   alterarAutor(){
     this.service.editarAutor(this.formulario.value).subscribe(res => {
+      this.formulario.reset;  
+      this.resetFormulario();
       this.cancelarEdicao();
-      this.atualizarLista();
       this.toastr.success('Autor alterado com sucesso', 'Desafio EDS.');
     },(error: any ) =>
     { 
@@ -87,6 +91,8 @@ export class AutoresComponent implements OnInit {
   }
 
   remover(item: Autor){
+    this.formulario.reset;    
+    this.resetFormulario();
     if (confirm('Deseja remover o autor ' + item.nome + ' ?')) {
         this.service.removerAutor(item.codAu).subscribe(res => {
           this.atualizarLista();
@@ -98,7 +104,6 @@ export class AutoresComponent implements OnInit {
     } else {
       this.toastr.warning('Remover cancelado', 'Desafio EDS.');
     }
-    this.formulario.setValue(this.resetarValor);
   }
   
   aplicarCssErro(campo){

@@ -33,9 +33,9 @@ export class LivrosComponent implements OnInit {
     this.router.navigate(['/livro/edit/' + codl]);
   }
 
-  deletarLivro(id: number) {
-    if (confirm('Deseja Remover Este livro?')) {
-      this.service.deleteLivro(id).then(res => {
+  deletarLivro(livro: Livro) {
+    if (confirm('Deseja Remover o livro '+ livro.titulo +'?')) {
+      this.service.deleteLivro(livro.codl).then(res => {
         this.refreshList();
         this.toastr.success("Livro Removido com Successo", "Desafio  EDS.");
       });
